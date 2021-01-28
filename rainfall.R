@@ -3,8 +3,16 @@ library(bomrang)
 
 ?bomrang # bomrang package help
 
-id <- c("023000") # target weather station(s) for data
-# 23000 = Adelai
+id <- c("23034") # target weather station(s) for data
+# 23000 = Adelaide
+# 23034 = Adelaide Airport
+# 23875 = Parawa
+# 23886 = Sellicks Hill
+# 23804 = Victor Harbor
+# 24048 = Renmark
+# 26021 = Mount Gambier
+# 16090 = Cooper Pedy
+
 
 # Retrieve historical data from designated weather station
 rain_data <- get_historical(stationid = id,
@@ -55,25 +63,31 @@ theme_bom <- function(){
   )
 }
 
-# Plotting the data: 1) Plot of daily and cumulative rainfall
+# Plotting the data: 1A) Plot of daily and cumulative rainfall
 
-year_range <- c("2018", "2019", "2020")
-max.yr <- rain_df.2 %>% filter(Year %in% year_range) %>% group_by(Year) %>% summarise(max = max(cr))
+year_range <- c("1996" : "2020")
+max.yr <- rain_df.2 %>% filter(Year %in% year_range) %>% group_by(Year) %>% summarise(max = max(cr)) 
 
-plot1 <- ggplot(data = rain_df.2[rain_df.2$Year %in% yearly_range,],
+plot1 <- ggplot(data = rain_df.2[rain_df.2$Year %in% year_range,],
                 aes(x = Date, y = rainfall, colour = Year)) +
   geom_line(aes(x = Date, y = cr), colour = "sienna2") +
   geom_point(aes(y = rainfall), alpha = 0.3) +
   theme_classic() +
   theme_bom() +
   labs(
-    title = "Daily & cumulative rainfall 2018 - 2021",
+    title = "Daily & cumulative rainfall 1996 - 2021",
     x = "",
     y = "rainfall in mm",
     caption = "Source: Bureau of Meterology."
   )
 
+plot1
+
+# Plotting the data: 1B) Plot of daily and cumulative rainfall, faceted by year. 
+
 plot1 +
-  geom_hline(data = max.yr, aes(yintercept = max, colour = Year), linetype = "dotdash")  
-  
-# add labels to these intercepts
+  geom_hline(data = max.yr, aes(yintercept = max, colour = Year), linetype = "dotdash") +
+  facet_wrap(. ~ Year, scales = "free_x") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+
