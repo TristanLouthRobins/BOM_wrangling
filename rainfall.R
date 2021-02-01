@@ -5,12 +5,6 @@ library(bomrang)
 
 id <- c("23034") # target weather station(s) for data
 # 23034 = Adelaide Airport
-# 23875 = Parawa
-# 23886 = Sellicks Hill
-# 23804 = Victor Harbor
-# 24048 = Renmark
-# 26021 = Mount Gambier
-# 16090 = Cooper Pedy
 
 # Retrieve historical data from designated weather station
 rain_data <- get_historical(stationid = id,
@@ -86,5 +80,10 @@ plot1 +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 
 
-
+# 23875 = Parawa
+# 23886 = Sellicks Hill
+# 23804 = Victor Harbor
+# 24048 = Renmark
+# 26021 = Mount Gambier
+# 16090 = Cooper Pedy
 
