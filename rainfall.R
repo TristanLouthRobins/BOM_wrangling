@@ -14,7 +14,7 @@ rain_data <- get_historical(stationid = id,
   filter(!is.na(rainfall)) %>% 
   select(-1, -7, -8)  # removes 'product_code', 'period' and 'quality' columns
   
-# Data tidy (part 1)
+# Data tidy 
 rain_df.1 <- as_tibble(rain_data)
 
 rain_df.1 <- rain_df.1 %>% 
