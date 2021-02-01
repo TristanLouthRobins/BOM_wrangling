@@ -65,7 +65,7 @@ theme_bom <- function(){
 
 # Plotting the data: 1A) Plot of daily and cumulative rainfall
 
-year_range <- c("1996" : "2020")
+year_range <- c("2019" : "2020")
 max.yr <- rain_df.2 %>% filter(Year %in% year_range) %>% group_by(Year) %>% summarise(max = max(cr)) 
 
 plot1 <- ggplot(data = rain_df.2[rain_df.2$Year %in% year_range,],
@@ -75,13 +75,11 @@ plot1 <- ggplot(data = rain_df.2[rain_df.2$Year %in% year_range,],
   theme_classic() +
   theme_bom() +
   labs(
-    title = "Daily & cumulative rainfall 1996 - 2021",
+    title = "Daily & cumulative rainfall 2019 - 2020",
     x = "",
     y = "rainfall in mm",
     caption = "Source: Bureau of Meterology."
-  )
-
-plot1
+  ) 
 
 # Plotting the data: 1B) Plot of daily and cumulative rainfall, faceted by year. 
 
@@ -89,5 +87,7 @@ plot1 +
   geom_hline(data = max.yr, aes(yintercept = max, colour = Year), linetype = "dotdash") +
   facet_wrap(. ~ Year, scales = "free_x") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+
 
 
