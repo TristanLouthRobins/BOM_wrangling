@@ -11,7 +11,7 @@ rain_data <- get_historical(stationid = id,
                             latlon = NULL,
                             radius = NULL,
                             type = "rain") %>% 
-  filter(rainfall > -0.1) %>% 
+  filter(!is.na(rainfall)) %>% 
   select(-1, -7, -8)  # removes 'product_code', 'period' and 'quality' columns
   
 # Data tidy (part 1)
