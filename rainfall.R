@@ -4,7 +4,6 @@ library(bomrang)
 ?bomrang # bomrang package help
 
 id <- c("23034") # target weather station(s) for data
-# 23000 = Adelaide
 # 23034 = Adelaide Airport
 # 23875 = Parawa
 # 23886 = Sellicks Hill
@@ -12,7 +11,6 @@ id <- c("23034") # target weather station(s) for data
 # 24048 = Renmark
 # 26021 = Mount Gambier
 # 16090 = Cooper Pedy
-
 
 # Retrieve historical data from designated weather station
 rain_data <- get_historical(stationid = id,
@@ -22,7 +20,6 @@ rain_data <- get_historical(stationid = id,
   filter(rainfall > -0.1) %>% 
   select(-1, -7, -8)  # removes 'product_code', 'period' and 'quality' columns
   
-
 # Data tidy (part 1)
 rain_df.1 <- as_tibble(rain_data)
 
@@ -35,7 +32,7 @@ rain_df.1 <- rain_df.1 %>%
   
 levels(rain_df.1$Month) <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec") 
 
-# calculate cumulative and monthly rainfall per year
+# Calculate cumulative and monthly rainfall per year
 
 rain_df.2 <- rain_df.1 %>% 
   group_by(Year) %>% 
